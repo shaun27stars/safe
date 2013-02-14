@@ -1,4 +1,4 @@
-require "aws/sdk"
+require "aws-sdk"
 require "cloudfiles"
 require 'net/sftp'
 require 'fileutils'
