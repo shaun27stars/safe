@@ -52,8 +52,8 @@ module Astrails
 
       def remote_bucket
         unless @remote_bucket
-          s3 = AWS::S3.new(:access_key_id => key, :secret_access_key => secret)
-          @remote_bucket = s3.buckets.create(bucket)
+          s3 = AWS::S3.new(:access_key_id => key, :secret_access_key => secret, :endpoint => endpoint)
+          @remote_bucket = s3.buckets[bucket] || s3.buckets.create(bucket)
         end
         @remote_bucket
       end
@@ -68,6 +68,10 @@ module Astrails
 
       def secret
         @config[:s3, :secret]
+      end
+
+      def endpoint
+        @config[:s3, :endpoint]
       end
 
       private
